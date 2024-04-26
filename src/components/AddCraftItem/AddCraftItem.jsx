@@ -1,47 +1,178 @@
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { IoMdCube } from "react-icons/io";
+import { FaUserCircle } from "react-icons/fa";
 
 const AddCraftItem = () => {
 
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const uid = user?.uid;
     console.log(uid);
 
     const handleAddItem = e => {
         e.preventDefault();
-        const email = e.target.email.value;
-        const name = e.target.name.value;
-        const newItems = { name, email , uid}
+        const item_name = e.target.item_name.value;
+        const price = e.target.price.value;
+        const image = e.target.image.value;
+        const subcategory_name = e.target.subcategory_name.value;
+        const rating = e.target.rating.value;
+        const customization = e.target.customization.value;
+        const processing_time = e.target.processing_time.value;
+        const stockStatus = e.target.stockStatus.value;
+        const short_description = e.target.short_description.value;
+        const user_name = e.target.user_name.value;
+        const user_email = e.target.user_email.value;
 
-         // send data to the server
-                fetch('http://localhost:5000/items', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(newItems)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data);
-                        if (data.insertedId) {
-                           console.log('Add Item successfully')
-                        }
-                    })
 
-    
+
+        const newItems = {
+            item_name,
+            price,
+            image,
+            subcategory_name,
+            rating, customization,
+            processing_time,
+            stockStatus,
+            short_description,
+            user_name,
+            user_email,
+            uid
+        }
+
+        // send data to the server
+        fetch('http://localhost:5000/items', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newItems)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    console.log('Add Item successfully')
+                }
+            })
+
     }
 
 
     return (
         <div>
-            <form onSubmit={handleAddItem} className="flex flex-col space-y-2 ml-40">
-                <input type="text" placeholder="1" className="input input-bordered input-primary w-full max-w-xs" name='name' />
+            <form onSubmit={handleAddItem} className="mx-auto my-10 w-[800px] bg-gray-300 rounded-lg shadow-lg p-6">
 
-                <input type="text" placeholder="2" className="input input-bordered input-primary w-full max-w-xs" name='email'/>
+                <h1 className="flex items-center gap-3 text-2xl pb-2 font-bold border-b border-[#958d8d]">
+                    <IoMdCube /> <span>Product Information</span></h1>
 
-                <input className="btn btn-primary" type="submit" value='submit'/>
-            
+                {/* Row 1 */}
+                <div className="flex gap-5 mt-4">
+                    <div className="w-full">
+                        <p className="font-semibold pb-1">Item Name</p>
+                        <input name="item_name" type="text" placeholder="Enter item name" className="p-1 w-full border input-info rounded-lg" />
+                    </div>
+                    <div className="w-full">
+                        <p className="font-semibold pb-1">Price</p>
+                        <input name="price" type="text" placeholder="$0.00" className="p-1 w-full border input-info rounded-lg" />
+                    </div>
+                </div>
+
+                {/* Row 2 */}
+                <div className="flex gap-5 mt-4 border-b border-[#958d8d] pb-8">
+                    <div className="w-full">
+                        <p className="font-semibold pb-1">Photo URL</p>
+                        <input name="image" type="text" placeholder="Enter image url" className="p-1 w-full border input-info rounded-lg" />
+                    </div>
+                    <div className="w-full">
+                        <p className="font-semibold pb-1">Subcategory Name</p>
+                        <select name="subcategory_name" className="p-1 w-full border input-info rounded-lg">
+                            <option disabled selected>Select subcategory_Name</option>
+                            <option>Landscape Painting</option>
+                            <option>Portrait Drawing</option>
+                            <option>Watercolour Painting</option>
+                            <option>Oil Painting</option>
+                            <option>Charcoal Sketching</option>
+                            <option>Cartoon Drawing</option>
+                        </select>
+                    </div>
+                </div>
+
+                {/* Row 3 */}
+                <div className="flex gap-5 pt-5">
+                    <div className="w-full">
+                        <p className="font-semibold pb-1">Rating</p>
+                        <select name="rating" className="p-1 w-full border input-info rounded-lg">
+                            <option disabled selected>Select Rating</option>
+                            <option>5</option>
+                            <option>4</option>
+                            <option>3</option>
+                            <option>2</option>
+                            <option>1</option>
+                        </select>
+                    </div>
+
+                    <div className="w-full">
+                        <p className="font-semibold pb-1"> Customization</p>
+                        <select name="customization" className="p-1 w-full border input-info rounded-lg">
+                            <option disabled selected>Select Option</option>
+                            <option>Yes</option>
+                            <option>No</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                {/* Row 4 */}
+                <div className="flex gap-5 pt-5 border-b border-[#958d8d] pb-8">
+                    <div className="w-full">
+                        <p className="font-semibold pb-1">Processing_time</p>
+                        <select name="processing_time" className="p-1 w-full border input-info rounded-lg">
+                            <option disabled selected>Select time</option>
+                            <option>1 days</option>
+                            <option>2-7 days</option>
+                            <option>8-12 days</option>
+                            <option>13-30 days</option>
+                            <option>Over 1 month</option>
+
+                        </select>
+                    </div>
+
+                    <div className="w-full">
+                        <p className="font-semibold pb-1"> Stock Status</p>
+                        <select name="stockStatus" className="p-1 w-full border input-info rounded-lg">
+                            <option disabled selected>Select Option</option>
+                            <option>Yes</option>
+                            <option>No</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                {/* Row 5 */}
+                <div className="mt-5">
+                    <p className="font-semibold pb-2">Short description</p>
+                    <textarea name="short_description" className="w-full border input-info rounded-lg" placeholder="Write here" rows="5"></textarea>
+                </div>
+
+                <h1 className="flex mt-8 items-center gap-3 text-2xl pb-2 font-bold border-b border-[#958d8d]">
+                    <FaUserCircle /> <span>User Information</span></h1>
+
+                {/* Row 1,1*/}
+                <div className="flex gap-5 mt-4">
+                    <div className="w-full">
+                        <p className="font-semibold pb-1">User Name</p>
+                        <input name="user_name" type="text" placeholder="Enter your name" className="p-1 w-full border input-info rounded-lg" />
+                    </div>
+                    <div className="w-full">
+                        <p className="font-semibold pb-1">Email</p>
+                        <input name="user_email" type="text" placeholder="Enter your Email" className="p-1 w-full border input-info rounded-lg" />
+                    </div>
+                </div>
+
+                <div className="text-center mt-10 mb-4">
+                    <input className="btn btn-success px-6" type="submit" name="" id="" value='Add Item' />
+                </div>
+
             </form>
         </div>
     );
