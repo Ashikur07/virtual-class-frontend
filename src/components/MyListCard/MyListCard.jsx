@@ -1,16 +1,51 @@
-
-import { HiOutlineUsers } from "react-icons/hi2";
-import { RiPagesFill } from "react-icons/ri";
-import { IoLocationOutline } from "react-icons/io5";
 import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import Swal from "sweetalert2";
 
 
-const MyListCard = ({ item }) => {
+const MyListCard = ({ item, items, setItems }) => {
+
+    const { _id } = item;
+
+    // delete item functionality
+    const handleDelete = _id => {
+        console.log(_id);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                fetch(`http://localhost:5000/items/${_id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.deletedCount > 0) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Item has been deleted.',
+                                'success'
+                            )
+                            const remaining = items.filter(item => item._id !== _id);
+                            setItems(remaining);
+                        }
+                    })
+
+            }
+        })
+    }
+
 
 
     return (
-        <div className='lg:h-[300px] flex gap-6 card-style p-4 mx-52 mb-10 '>
+        <div className='lg:h-[300px] flex gap-6 card-style p-4 mx-52 mb-5 '>
 
             <div className=''>
                 <img className="rounded-xl w-[350px] h-[270px]" src={item.image} alt="" />
@@ -40,7 +75,7 @@ const MyListCard = ({ item }) => {
 
                 <div className='flex flex-col lg:flex-row gap-4 mt-4 items-center'>
 
-                    <button className='font-medium text-lg btn btn-warning text-white'>Delete</button>
+                    <button onClick={() => handleDelete(_id)} className='font-medium text-lg btn btn-warning text-white'>Delete</button>
 
                     <Link to={`/details/${item._id}`}>
                         <button className='view-details ml-16 lg:ml-0 mt-4 lg:mt-0'>Update</button>
