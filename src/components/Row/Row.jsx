@@ -6,7 +6,7 @@ const Row = ({ item }) => {
 
     return (
 
-        <tr>
+        <tr className="border-[6px] border-white">
             <td>
                 <img className="w-32 h-32" src={item.image
                 } alt="Avatar Tailwind CSS Component" />
@@ -23,7 +23,7 @@ const Row = ({ item }) => {
             <td className="font-bold">{item.rating}</td>
 
             <td>
-                <Link to={`/details/${item._id}`} className="btn btn-success text-white px-6">details</Link>
+                <Link to={`/details/${item._id}`} className="btn btn-success text-white px-4">View Details</Link>
             </td>
         </tr >
     );
