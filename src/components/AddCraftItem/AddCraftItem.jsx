@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { IoMdCube } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const AddCraftItem = () => {
 
@@ -52,6 +53,13 @@ const AddCraftItem = () => {
                 console.log(data);
                 if (data.insertedId) {
                     console.log('Add Item successfully')
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Item Added Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                      })
+                      e.target.reset();
                 }
             })
 
