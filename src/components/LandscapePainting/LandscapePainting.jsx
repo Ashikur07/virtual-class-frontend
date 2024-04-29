@@ -24,9 +24,9 @@ const LandscapePainting = () => {
     console.log(items);
 
     return (
-        <div className="mt-12 mb-24">
-            <h1 className="text-5xl mb-8 font-semibold text-center">Landscape Painting</h1>
-            <div className="grid grid-cols-2 max-w-4xl mx-auto gap-4 justify-center">
+        <div className="mt-10 mb-24 min-h-[70vh]">
+            <h1 className="bg-white py-3 rounded mx-auto max-w-xl text-3xl lg:text-5xl mb-6 font-semibold text-center">Landscape Painting</h1>
+            <div className="grid lg:grid-cols-2 max-w-4xl mx-5 lg:mx-auto gap-4 justify-center">
                 {
                     items.map(item => <SubCategoryItemCard 
                     key={item._id}

@@ -100,7 +100,7 @@ const Navbar = () => {
                 </div>
                 <Link to="/" className="" onClick={closeDropdown}>
                     <div className="flex items-center gap-2">
-                        <img className="hidden lg:block w-16" src="https://img.freepik.com/premium-photo/creative-logo-with-pencil-surrounded-by-bright-feathers_780672-39.jpg?w=2000" alt="" />
+                        <img className="rounded-lg hidden lg:block w-14" src="https://img.freepik.com/premium-photo/creative-logo-with-pencil-surrounded-by-bright-feathers_780672-39.jpg?w=2000" alt="" />
                     <h1 className="text-lg lg:text-3xl font-bold">Craft Haven</h1>
                     </div>
                 </Link>
@@ -131,7 +131,7 @@ const Navbar = () => {
                             </summary>
 
                             <div className=" -left-20 lg:-left-16 top-12 lg:top-[59px] menu dropdown-content z-[10]  bg-slate-600 rounded-lg text-white w-48 p-4 space-y-3">
-                                <p>md ashikur Rahaman </p>
+                                <p>{user?.displayName}</p>
                                 <div className="space-y-3">
                                     <button className="bg-slate-800 py-2 px-3 rounded-md font-semibold w-full"><Link to='/profile'>Profile</Link></button><br />
                                     <button onClick={handleLogOut} className="bg-slate-800 w-full py-2 px-3 rounded-md font-semibold">Logout</button>

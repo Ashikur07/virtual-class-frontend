@@ -8,7 +8,7 @@ const SubCategoryItemCard = ({ item }) => {
     const { _id, image, item_name,subcategory_name, processing_time, rating, price } = item;
 
     return (
-        <div data-aos="zoom-in" data-aos-duration="1000" className="card bg-base-100 shadow-xl border border-[#d8c7c7]">
+        <div className="card bg-white  shadow-xl border border-[#d8c7c7]">
             <figure><img className="h-[350px] w-full" src={image} alt="Image comming" /></figure>
             <div className="card-body mr-4 lg:mr-0">
                 <h2 className="text-2xl font-semibold">{item_name}</h2>

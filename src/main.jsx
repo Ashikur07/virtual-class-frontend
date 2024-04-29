@@ -16,13 +16,13 @@ import MyArtCraftList from './components/MyArtCraftList/MyArtCraftList.jsx';
 import Details from './components/Details/Details.jsx';
 import UpdateItem from './components/Update/UpdateItem.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
-import CraftDetails from './components/CraftDetails/CraftDetails.jsx';
 import CharcoalSketching from './components/CharcoalSketching/CharcoalSketching.jsx';
 import CartoonDrawing from './components/CartoonDrawing/CartoonDrawing.jsx';
 import LandscapePainting from './components/LandscapePainting/LandscapePainting.jsx';
 import OilPainting from './components/OilPainting/OilPainting.jsx';
 import PortraitDrawing from './components/PortraitDrawing/PortraitDrawing.jsx';
 import WatercolurPainting from './components/WatercolurPainting/WatercolurPainting.jsx';
+import Profile from './components/Profile/Profile.jsx';
 
 
 const router = createBrowserRouter([
@@ -51,6 +51,10 @@ const router = createBrowserRouter([
         element: <Register></Register>,
       },
       {
+        path: '/profile',
+        element: <PrivateRoute><Profile></Profile></PrivateRoute>,
+      },
+      {
         path: '/addCraftItem',
         element: <PrivateRoute><AddCraftItem></AddCraftItem></PrivateRoute>,
       },
@@ -66,12 +70,12 @@ const router = createBrowserRouter([
       },
       {
         path: 'craftDetails/:id',
-        element: <PrivateRoute><CraftDetails></CraftDetails></PrivateRoute>,
+        element: <PrivateRoute><Details></Details></PrivateRoute>,
         loader: ({ params }) => fetch(`https://assignment-10-server-site-beta.vercel.app/craftItems/${params.id}`),
       },
       {
         path: 'subCategoryItemDetails/:id',
-        element: <CraftDetails></CraftDetails>,
+        element: <Details></Details>,
         loader: ({ params }) => fetch(`https://assignment-10-server-site-beta.vercel.app/subcategory/${params.id}`),
       },
     
