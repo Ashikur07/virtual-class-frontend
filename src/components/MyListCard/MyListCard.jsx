@@ -45,10 +45,10 @@ const MyListCard = ({ item, items, setItems }) => {
 
 
     return (
-        <div className='lg:h-[300px] flex gap-6 card-style p-4 mx-52 mb-5 '>
+        <div className='lg:h-[300px] flex flex-col lg:flex-row gap-6 card-style p-4 mx-5 lg:mx-52 mb-5 '>
 
             <div className=''>
-                <img className="rounded-xl w-[350px] h-[270px]" src={item.image} alt="" />
+                <img className="rounded-xl w-full lg:w-[350px] h-[270px]" src={item.image} alt="" />
             </div>
 
 
@@ -73,12 +73,12 @@ const MyListCard = ({ item, items, setItems }) => {
                 </div>
 
 
-                <div className='flex flex-col lg:flex-row gap-4 mt-4 items-center'>
+                <div className='flex gap-4 mt-4 items-center'>
 
                     <button onClick={() => handleDelete(_id)} className='font-medium text-lg btn btn-warning text-white'>Delete</button>
 
                     <Link to={`/update/${item._id}`}>
-                        <button className='view-details ml-16 lg:ml-0 mt-4 lg:mt-0'>Update</button>
+                        <button className='view-details ml-1 lg:ml-0  lg:mt-0'>Update</button>
                     </Link>
                 </div>
 

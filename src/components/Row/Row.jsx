@@ -8,7 +8,7 @@ const Row = ({ item }) => {
 
         <tr className="border-[6px] border-white">
             <td>
-                <img className="w-32 h-32" src={item.image
+                <img className="w-32 lg:h-32" src={item.image
                 } alt="Avatar Tailwind CSS Component" />
             </td>
 
@@ -16,11 +16,11 @@ const Row = ({ item }) => {
                 {item.item_name}
             </td>
 
-            <td>{item.subcategory_name}</td>
+            <td className="hidden lg:block lg:pt-16 font-bold">{item.subcategory_name}</td>
 
             <td className="font-bold">$ {item.price}</td>
 
-            <td className="font-bold">{item.rating}</td>
+            <td className="font-bold hidden lg:block">{item.rating}</td>
 
             <td>
                 <Link to={`/details/${item._id}`} className="btn btn-success text-white px-4">View Details</Link>

@@ -71,13 +71,13 @@ const AddCraftItem = () => {
 
     return (
         <div className="pb-14">
-            <form onSubmit={handleAddItem} className="mx-auto my-10 w-[800px] bg-gray-300 rounded-lg shadow-lg p-6">
+            <form onSubmit={handleAddItem} className="mx-5 lg:mx-auto my-10 lg:w-[800px] bg-gray-300 rounded-lg shadow-lg p-6">
 
                 <h1 className="flex items-center gap-3 text-2xl pb-2 font-bold border-b border-[#958d8d]">
                     <IoMdCube /> <span>Product Information</span></h1>
 
                 {/* Row 1 */}
-                <div className="flex gap-5 mt-4">
+                <div className="flex flex-col lg:flex-row gap-5 mt-4">
                     <div className="w-full">
                         <p className="font-semibold pb-1">Item Name</p>
                         <input  name="item_name" type="text" placeholder="Enter item name" className="bg-white p-1 w-full border input-info rounded-lg" />
@@ -89,7 +89,7 @@ const AddCraftItem = () => {
                 </div>
 
                 {/* Row 2 */}
-                <div className="flex gap-5 mt-4 border-b border-[#958d8d] pb-8">
+                <div className="flex flex-col lg:flex-row gap-5 mt-4 border-b border-[#958d8d] pb-8">
                     <div className="w-full">
                         <p className="font-semibold pb-1">Photo URL</p>
                         <input name="image" type="text" placeholder="Enter image url" className="bg-white p-1 w-full border input-info rounded-lg" />
@@ -109,7 +109,7 @@ const AddCraftItem = () => {
                 </div>
 
                 {/* Row 3 */}
-                <div className="flex gap-5 pt-5">
+                <div className="flex flex-col lg:flex-row gap-5 pt-5">
                     <div className="w-full">
                         <p className="font-semibold pb-1">Rating</p>
                         <select name="rating" className="bg-white p-1 w-full border input-info rounded-lg">
@@ -134,7 +134,7 @@ const AddCraftItem = () => {
                 </div>
 
                 {/* Row 4 */}
-                <div className="flex gap-5 pt-5 border-b border-[#958d8d] pb-8">
+                <div className="flex flex-col lg:flex-row gap-5 pt-5 border-b border-[#958d8d] pb-8">
                     <div className="w-full">
                         <p className="font-semibold pb-1">Processing_time</p>
                         <select name="processing_time" className="bg-white p-1 w-full border input-info rounded-lg">

@@ -85,13 +85,13 @@ const UpdateItem = () => {
         <div>
             <h1 className="bg-white  text-4xl font-bold my-8 py-2 max-w-lg mx-auto text-center">Item Update Now</h1>
 
-            <form onSubmit={handleAddItem} className="mx-auto mb-28 w-[800px] bg-gray-300 rounded-lg shadow-lg p-6">
+            <form onSubmit={handleAddItem} className="mx-5 lg:mx-auto mb-28 lg:w-[800px] bg-gray-300 rounded-lg shadow-lg p-6">
 
                 <h1 className="flex items-center gap-3 text-2xl pb-2 font-bold border-b border-[#958d8d]">
                     <IoMdCube /> <span>Product Information</span></h1>
 
                 {/* Row 1 */}
-                <div className="flex gap-5 mt-4">
+                <div className="flex flex-col lg:flex-row gap-5 mt-4">
                     <div className="w-full">
                         <p className="font-semibold pb-1">Item Name</p>
                         <input name="item_name" type="text" placeholder={item_name} className="bg-white p-1 w-full border input-info rounded-lg" />
@@ -103,7 +103,7 @@ const UpdateItem = () => {
                 </div>
 
                 {/* Row 2 */}
-                <div className="flex gap-5 mt-4 border-b border-[#958d8d] pb-8">
+                <div className="flex flex-col lg:flex-row gap-5 mt-4 border-b border-[#958d8d] pb-8">
                     <div className="w-full">
                         <p className="font-semibold pb-1">Photo URL</p>
                         <input name="image" type="text" placeholder={image} className="bg-white p-1 w-full border input-info rounded-lg" />
@@ -123,7 +123,7 @@ const UpdateItem = () => {
                 </div>
 
                 {/* Row 3 */}
-                <div className="flex gap-5 pt-5">
+                <div className="flex flex-col lg:flex-row gap-5 pt-5">
                     <div className="w-full">
                         <p className="font-semibold pb-1">Rating</p>
                         <select defaultValue={rating} name="rating" className="bg-white p-1 w-full border input-info rounded-lg">
@@ -148,7 +148,7 @@ const UpdateItem = () => {
                 </div>
 
                 {/* Row 4 */}
-                <div className="flex gap-5 pt-5 border-b border-[#958d8d] pb-8">
+                <div className="flex flex-col lg:flex-row gap-5 pt-5 border-b border-[#958d8d] pb-8">
                     <div className="w-full">
                         <p className="font-semibold pb-1">Processing_time</p>
                         <select defaultValue={processing_time} name="processing_time" className="bg-white p-1 w-full border input-info rounded-lg">

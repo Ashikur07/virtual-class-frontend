@@ -145,7 +145,7 @@ const Navbar = () => {
                     </div>
 
                 ) : (
-                    <div className="lg:space-x-3">
+                    <div className="lg:space-x-3 lg:flex">
                         <NavLink to="/login" onClick={closeDropdown}>
                             <button className="lg:mr-3 lg:text-lg font-bold nav-btn px-3 lg:px-4 py-2 rounded-xl hover:bg-blue-900 hover:text-white">Login</button>
                         </NavLink>
