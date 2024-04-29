@@ -16,7 +16,7 @@ const Banner = () => {
                 spaceBetween={30}
                 centeredSlides={true}
                 autoplay={{
-                    delay: 4000,
+                    delay: 400000,
                     disableOnInteraction: false,
                 }}
                 pagination={{
@@ -31,10 +31,12 @@ const Banner = () => {
                     <div className='relative'>
                         <img className='banner-img' src="https://i.ibb.co/KNtDvjZ/photo-1472791108553-c9405341e398-q-80-w-1874-auto-format-fit-crop-ixlib-rb-4-0.jpg" alt="" />
                     </div>
-                    <div className='space-y-4 absolute top-[30%] left-[12%] lg:left-[19%]  text-white'>
+                    <div className='space-y-4 absolute top-[30%] lg:left-[19%] text-white'>
                         <h1 className='text-4xl lg:text-6xl font-semibold'>Choose Our <span className='text-yellow-300'>Painting and Drawing</span></h1>
-                        <p className='pb-5 text-xl'>Choosing prints and drawings demands keen eye for style, subject, and aesthetic appeal, <br /> enriching our spaces with beauty.</p>
-                        <button className='btn btn-primary'>Explore Now</button>
+                        <p className='hidden lg:block pb-5 text-xl'>Choosing prints and drawings demands keen eye for style, subject, and aesthetic appeal, <br /> enriching our spaces with beauty.</p>
+                       
+                            <button className='ml-[420px] hidden lg:block btn btn-primary'>Explore Now</button>
+                       
                     </div>
                 </SwiperSlide>
 
@@ -45,8 +47,8 @@ const Banner = () => {
                         </div>
                         <div className='space-y-4 absolute top-[30%] left-[12%] lg:left-[19%]  text-white'>
                             <h1 className='text-4xl lg:text-6xl font-semibold'>Choose Our <span className='text-yellow-300'>Painting and Drawing</span></h1>
-                            <p className='pb-5 text-xl'>Choosing prints and drawings demands keen eye for style, subject, and aesthetic appeal, <br /> enriching our spaces with beauty.</p>
-                            <button className='btn btn-primary'>Explore Now</button>
+                            <p className='hidden lg:block pb-5 text-xl'>Choosing prints and drawings demands keen eye for style, subject, and aesthetic appeal, <br /> enriching our spaces with beauty.</p>
+                            <button className='ml-[420px] hidden lg:block btn btn-primary'>Explore Now</button>
                         </div>
 
                     </div>
@@ -58,8 +60,8 @@ const Banner = () => {
                     </div>
                     <div className='space-y-4 absolute top-[30%] left-[12%] lg:left-[19%]  text-white'>
                         <h1 className='text-4xl lg:text-6xl font-semibold'>Choose Our <span className='text-yellow-300'>Painting and Drawing</span></h1>
-                        <p className='pb-5 text-xl'>Choosing prints and drawings demands keen eye for style, subject, and aesthetic appeal, <br /> enriching our spaces with beauty.</p>
-                        <button className='btn btn-primary'>Explore Now</button>
+                        <p className='hidden lg:block pb-5 text-xl'>Choosing prints and drawings demands keen eye for style, subject, and aesthetic appeal, <br /> enriching our spaces with beauty.</p>
+                        <button className='ml-[420px] hidden lg:block btn btn-primary'>Explore Now</button>
                     </div>
                 </SwiperSlide>
 

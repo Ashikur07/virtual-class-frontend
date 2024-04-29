@@ -16,7 +16,7 @@ const ArtCraftCategories = () => {
         <div className="mb-32 mt-20 ">
             <h1 className='bg-white pt-5 text-4xl font-bold text-center pb-5 max-w-xl mx-auto'>Art & Craft Categories</h1>
 
-            <div className="grid grid-cols-3 max-w-7xl mx-auto px-10 gap-7">
+            <div className="grid lg:grid-cols-3 max-w-7xl lg:mx-auto  lg:px-10 gap-7">
                 {
                     items.map(item => <CategoriesCard
                     key={item._id}

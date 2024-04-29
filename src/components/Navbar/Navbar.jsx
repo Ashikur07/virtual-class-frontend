@@ -93,14 +93,14 @@ const Navbar = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </div>
                     {isDropdownOpen && (
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[2] p-2 shadow bg-slate-700 rounded-box w-52">
+                        <ul tabIndex={0} className="text-white menu menu-sm dropdown-content mt-3 z-[2] p-2 shadow bg-slate-700 rounded-box w-52">
                             {links}
                         </ul>
                     )}
                 </div>
                 <Link to="/" className="" onClick={closeDropdown}>
                     <div className="flex items-center gap-2">
-                        <img className="w-16" src="https://img.freepik.com/premium-photo/creative-logo-with-pencil-surrounded-by-bright-feathers_780672-39.jpg?w=2000" alt="" />
+                        <img className="hidden lg:block w-16" src="https://img.freepik.com/premium-photo/creative-logo-with-pencil-surrounded-by-bright-feathers_780672-39.jpg?w=2000" alt="" />
                     <h1 className="text-lg lg:text-3xl font-bold">Craft Haven</h1>
                     </div>
                 </Link>
@@ -130,7 +130,7 @@ const Navbar = () => {
                                 </div>
                             </summary>
 
-                            <div className=" -left-16 top-[62px] menu dropdown-content z-[10]  bg-slate-600 rounded-lg text-white w-48 p-4 space-y-3">
+                            <div className=" -left-20 lg:-left-16 top-12 lg:top-[59px] menu dropdown-content z-[10]  bg-slate-600 rounded-lg text-white w-48 p-4 space-y-3">
                                 <p>md ashikur Rahaman </p>
                                 <div className="space-y-3">
                                     <button className="bg-slate-800 py-2 px-3 rounded-md font-semibold w-full"><Link to='/profile'>Profile</Link></button><br />
@@ -140,18 +140,18 @@ const Navbar = () => {
 
                         </details>
 
-                        <button onClick={handleLogOut} className="mr-3 lg:mr-0 lg:text-lg font-bold nav-btn px-3 lg:px-4  rounded-xl hover:bg-blue-900 hover:text-white">Logout</button>
+                        <button onClick={handleLogOut} className="hidden lg:block mr-3 lg:mr-0 lg:text-lg font-bold nav-btn px-3 lg:px-4  rounded-xl hover:bg-blue-900 hover:text-white">Logout</button>
 
                     </div>
 
                 ) : (
-                    <div className="space-x-3">
+                    <div className="lg:space-x-3">
                         <NavLink to="/login" onClick={closeDropdown}>
-                            <button className="mr-3 lg:mr-0 lg:text-lg font-bold nav-btn px-3 lg:px-4 py-2 rounded-xl hover:bg-blue-900 hover:text-white">Login</button>
+                            <button className="lg:mr-3 lg:text-lg font-bold nav-btn px-3 lg:px-4 py-2 rounded-xl hover:bg-blue-900 hover:text-white">Login</button>
                         </NavLink>
 
                         <NavLink to="/register" onClick={closeDropdown}>
-                            <button className="mr-3 lg:mr-0 lg:text-lg font-bold nav-btn px-3 lg:px-4 py-2 rounded-xl hover:bg-blue-900 hover:text-white">Register</button>
+                            <button className="hidden lg:block mr-3 lg:mr-0 lg:text-lg font-bold nav-btn px-3 lg:px-4 py-2 rounded-xl hover:bg-blue-900 hover:text-white">Register</button>
                         </NavLink>
                     </div>
                 )}

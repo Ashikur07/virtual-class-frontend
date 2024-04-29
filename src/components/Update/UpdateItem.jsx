@@ -1,9 +1,8 @@
 import { IoMdCube } from "react-icons/io";
-import { FaUserCircle } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const UpdateItem = () => {
 
@@ -11,6 +10,8 @@ const UpdateItem = () => {
     const uid = user?.uid;
     const user_name = user?.displayName;
     const user_email = user?.email;
+
+    const navigate = useNavigate();
   
     const items = useLoaderData();
     const {
@@ -36,9 +37,7 @@ const UpdateItem = () => {
         const processing_time = e.target.processing_time.value;
         const stockStatus = e.target.stockStatus.value;
         const short_description = e.target.short_description.value;
-        const user_name = e.target.user_name.value;
-        const user_email = e.target.user_email.value;
-
+        
         const updatedItem = {
             item_name,
             price,
@@ -71,6 +70,10 @@ const UpdateItem = () => {
                         icon: 'success',
                         confirmButtonText: 'Cool'
                     })
+
+                    setTimeout(() => {
+                        navigate('/myArt&craftList');
+                    }, 1200);
                 }
             })
 
