@@ -6,7 +6,9 @@ const Root = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <Outlet></Outlet>
+            <div className='py-12'>
+                <Outlet></Outlet>
+            </div>
             <Footer></Footer>
         </div>
     );

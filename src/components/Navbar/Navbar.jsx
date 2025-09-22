@@ -1,167 +1,212 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import swal from "sweetalert";
-import { Tooltip } from 'react-tooltip';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
-    console.log(user);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [taskCount] = useState(1);
+    const [isRoutineOpen, setIsRoutineOpen] = useState(false);
+    const [userRole, setUserRole] = useState(null);
+    const routineRef = useRef(null);
 
-    const [theme, setTheme] = useState('light');
-
-    const handleToggle = e => {
-        if (e.target.checked) {
-            setTheme('dark')
+    useEffect(() => {
+        if (user?.email) {
+            const fetchUserRole = async () => {
+                try {
+                    const response = await fetch("http://localhost:5000/users");
+                    const allUsers = await response.json();
+                    const currentUser = allUsers.find(
+                        (dbUser) => dbUser.email === user.email
+                    );
+                    if (currentUser) {
+                        setUserRole(currentUser.role);
+                    }
+                } catch (error) {
+                    console.error("Failed to fetch user role:", error);
+                }
+            };
+            fetchUserRole();
+        } else {
+            setUserRole(null);
         }
-        else {
-            setTheme('light')
-        }
-    }
+    }, [user]);
 
-
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (routineRef.current && !routineRef.current.contains(event.target)) {
+                setIsRoutineOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
     const handleLogOut = () => {
         logOut()
             .then(() => {
                 swal({
-                    title: "Logout Successfull..!",
+                    title: "Logout Successful!",
                     icon: "success",
                     timer: 2000,
                 });
             })
-            .catch();
+            .catch(() => {});
     };
 
-    const handleDropdownToggle = () => {
-        setIsDropdownOpen((prevState) => !prevState);
-    };
+    const dailyRoutinePath =
+        userRole === "teacher"
+            ? "/routine/TeacherDailyView"
+            : "/routine/StudentDailyView";
 
-    const closeDropdown = () => {
-        setIsDropdownOpen(false);
-    };
-
-    const [isOpen, setIsOpen] = useState(false);
-    const handleMouseEnter = () => {
-        setIsOpen(true);
-    };
-    const handleMouseLeave = () => {
-        setIsOpen(false);
-    };
-
-
-    const links = (
-        <>
-            <li className="z-[10] font-semibold">
-                <NavLink to="/" onClick={closeDropdown}>
-                    <a data-tooltip-id="my-tooltip" data-tooltip-content="Home">Home</a>
-                    <Tooltip id="my-tooltip" />
-                </NavLink>
-            </li>
-            <li className="z-[10] font-semibold">
-                <NavLink to="/allArt&craftItems" onClick={closeDropdown}>
-                    <a data-tooltip-id="my-tooltip" data-tooltip-content="All Art & Craft Items">All Art & Craft Items</a>
-                    <Tooltip id="my-tooltip" />
-                </NavLink>
-            </li>
-
-            {user && (
-                <>
-                    <li className="z-[10] font-semibold">
-                        <NavLink to="/addCraftItem" onClick={closeDropdown}>
-                            <a data-tooltip-id="my-tooltip" data-tooltip-content="Add Craft Item">Add Craft Item</a>
-                            <Tooltip id="my-tooltip" />
-                        </NavLink>
-                    </li>
-                    <li className="z-[10] font-semibold">
-                        <NavLink to="/myArt&craftList" onClick={closeDropdown}>
-                            <a data-tooltip-id="my-tooltip" data-tooltip-content="My Art&Craft List">My Art&Craft List</a>
-                            <Tooltip id="my-tooltip" />
-                        </NavLink>
-                    </li>
-                </>
-            )}
-        </>
-    );
+    const taskPath = userRole === "teacher" ? "/addTask" : "/taskList";
+    const taskLabel = userRole === "teacher" ? "Add Task" : "Task";
 
     return (
-        <div className="bg-[#f6f4f2] navbar md:px-4 lg:px-28 shadow-xl">
-            <div className="navbar-start">
-                <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden" onClick={handleDropdownToggle}>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-                    </div>
-                    {isDropdownOpen && (
-                        <ul tabIndex={0} className="text-white menu menu-sm dropdown-content mt-3 z-[2] p-2 shadow bg-slate-700 rounded-box w-52">
-                            {links}
-                        </ul>
-                    )}
-                </div>
-                <Link to="/" className="" onClick={closeDropdown}>
-                    <div className="flex items-center gap-2">
-                        <img className="rounded-lg hidden lg:block w-14" src="https://img.freepik.com/premium-photo/creative-logo-with-pencil-surrounded-by-bright-feathers_780672-39.jpg?w=2000" alt="" />
-                    <h1 className="text-lg lg:text-3xl font-bold">Craft Haven</h1>
-                    </div>
+        <div className="bg-white shadow-md fixed w-full z-50 px-6 md:px-20 py-3 flex justify-between items-center">
+            {/* Left side */}
+            <div className="flex items-center gap-3">
+                <Link to="/" className="flex items-center gap-2">
+                    <h1 className="text-xl md:text-2xl font-bold text-blue-700">
+                        Virtual-Class
+                    </h1>
                 </Link>
             </div>
 
-            <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
-                    {links}
-                </ul>
-            </div>
-
-            <div className="navbar-end space-x-5">
-
-                {user ? (
-
-                    <div className="flex gap-4">
-
-                        <details
-                            className="dropdown"
-                            open={isOpen}
-                            onMouseEnter={handleMouseEnter}
-                            onMouseLeave={handleMouseLeave}
+            {/* Center */}
+            {user && userRole && (
+                <div className="hidden md:flex items-center gap-6">
+                    {/* Routine dropdown */}
+                    <div className="relative" ref={routineRef}>
+                        <button
+                            onClick={() => setIsRoutineOpen(!isRoutineOpen)}
+                            className="px-4 py-2 font-semibold text-gray-700 bg-gray-100 hover:bg-blue-600 hover:text-white rounded-xl transition flex items-center gap-1"
                         >
-                            <summary className="avatar mt-1" >
-                                <div className="drop cursor-pointer w-10 lg:w-12 rounded-full ring ring-blue-400">
-                                    <img src={user.photoURL} />
-                                </div>
-                            </summary>
+                            Routine
+                            <svg
+                                className={`w-4 h-4 transition-transform ${
+                                    isRoutineOpen ? "rotate-180" : ""
+                                }`}
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M19 9l-7 7-7-7"
+                                />
+                            </svg>
+                        </button>
 
-                            <div className=" -left-20 lg:-left-16 top-12 lg:top-[59px] menu dropdown-content z-[10]  bg-slate-600 rounded-lg text-white w-48 p-4 space-y-3">
-                                <p>{user?.displayName}</p>
-                                <div className="space-y-3">
-                                    <button className="bg-slate-800 py-2 px-3 rounded-md font-semibold w-full"><Link to='/profile'>Profile</Link></button><br />
-                                    <button onClick={handleLogOut} className="bg-slate-800 w-full py-2 px-3 rounded-md font-semibold">Logout</button>
-                                </div>
+                        {/* Dropdown Menu */}
+                        {isRoutineOpen && (
+                            <div className="absolute left-0 top-full bg-white shadow-lg rounded-lg mt-2 w-44 z-50">
+                                <ul className="py-2 text-gray-700 font-medium">
+                                    <li>
+                                        <NavLink
+                                            to="/routine/fixedRoutine"
+                                            className={({ isActive }) =>
+                                                `block px-4 py-2 hover:bg-blue-50 transition ${
+                                                    isActive
+                                                        ? "bg-blue-100 text-blue-600 font-semibold"
+                                                        : ""
+                                                }`
+                                            }
+                                            onClick={() => setIsRoutineOpen(false)}
+                                        >
+                                            Fixed Routine
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            to={dailyRoutinePath}
+                                            className={({ isActive }) =>
+                                                `block px-4 py-2 hover:bg-blue-50 transition ${
+                                                    isActive
+                                                        ? "bg-blue-100 text-blue-600 font-semibold"
+                                                        : ""
+                                                }`
+                                            }
+                                            onClick={() => setIsRoutineOpen(false)}
+                                        >
+                                            Daily View
+                                        </NavLink>
+                                    </li>
+                                </ul>
                             </div>
-
-                        </details>
-
-                        <button onClick={handleLogOut} className="hidden lg:block mr-3 lg:mr-0 lg:text-lg font-bold nav-btn px-3 lg:px-4  rounded-xl hover:bg-blue-900 hover:text-white">Logout</button>
-
+                        )}
                     </div>
 
-                ) : (
-                    <div className="lg:space-x-3 lg:flex">
-                        <NavLink to="/login" onClick={closeDropdown}>
-                            <button className="lg:mr-3 lg:text-lg font-bold nav-btn px-3 lg:px-4 py-2 rounded-xl hover:bg-blue-900 hover:text-white">Login</button>
+                    {/* Task button */}
+                    <div className="relative">
+                        <NavLink
+                            to={taskPath}
+                            className="px-4 py-2 font-semibold text-gray-700 bg-gray-100 hover:bg-green-600 hover:text-white rounded-xl transition"
+                        >
+                            {taskLabel}
                         </NavLink>
+                        {userRole !== "teacher" && taskCount > 0 && (
+                            <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                                {taskCount}
+                            </span>
+                        )}
+                    </div>
 
-                        <NavLink to="/register" onClick={closeDropdown}>
-                            <button className="hidden lg:block mr-3 lg:mr-0 lg:text-lg font-bold nav-btn px-3 lg:px-4 py-2 rounded-xl hover:bg-blue-900 hover:text-white">Register</button>
+                    {/* ✅ Only for teacher */}
+                    {userRole === "teacher" && (
+                        <>
+                            <NavLink
+                                to="/viewSubmissions"
+                                className="px-4 py-2 font-semibold text-gray-700 bg-gray-100 hover:bg-purple-600 hover:text-white rounded-xl transition"
+                            >
+                                View Task Submission
+                            </NavLink>
+                        
+                        </>
+                    )}
+                </div>
+            )}
+
+            {/* Right side */}
+            <div className="flex items-center gap-4">
+                {!user ? (
+                    <>
+                        <NavLink to="/login">
+                            <button className="px-5 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-full shadow-md hover:scale-105 transition">
+                                Login
+                            </button>
                         </NavLink>
+                        <NavLink to="/register">
+                            <button className="px-5 py-2 bg-gradient-to-r from-pink-500 to-red-600 text-white font-semibold rounded-full shadow-md hover:scale-105 transition">
+                                Register
+                            </button>
+                        </NavLink>
+                    </>
+                ) : (
+                    <div className="flex items-center gap-3">
+                        <Link to="/profile">
+                            <img
+                                src={
+                                    user?.photoURL ||
+                                    "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                                }
+                                alt="user"
+                                className="w-10 h-10 rounded-full border-2 border-blue-500 shadow-md cursor-pointer"
+                            />
+                        </Link>
+                        <button
+                            onClick={handleLogOut}
+                            className="px-5 py-2 bg-red-500 text-white font-semibold rounded-full shadow-md hover:bg-red-600 transition"
+                        >
+                            Logout
+                        </button>
                     </div>
                 )}
-
-                {/* theme added */}
-                <label className=" cursor-pointer grid place-items-center">
-                    <input onChange={handleToggle} type="checkbox" value={theme} className="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2" />
-                    <svg className="col-start-1 row-start-1 stroke-base-100 fill-base-100" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5" /><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" /></svg>
-                    <svg className="col-start-2 row-start-1 stroke-base-100 fill-base-100" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                </label>
             </div>
         </div>
     );
