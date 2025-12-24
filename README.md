@@ -1,7 +1,5 @@
 # website name & Live link
-Website Name : Craft Haven
 
-Live link : https://assignment-10-by-ashik.netlify.app
 
 # Feature and Charactristics of my website :
 
