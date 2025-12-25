@@ -17,7 +17,7 @@
 • Painting and Drawing
 
 # Used npm package name:
-1. React-simple-typewriter
+1. React-simple-typewrite
 
 
 
