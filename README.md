@@ -19,7 +19,6 @@
 # Used npm package name:
 1. React-simple-typewriter
 
-2. React-tooltip
 
 
 
