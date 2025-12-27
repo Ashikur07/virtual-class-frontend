@@ -14,7 +14,7 @@
 • Responsive Design and Cross-Platform Compatibility .
 
 # Selected category
-• Painting and Drawing
+• Painting and Drawin
 
 
 
