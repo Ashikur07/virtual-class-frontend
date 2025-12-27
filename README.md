@@ -16,7 +16,7 @@
 # Selected category
 • Painting and Drawing
 
-# Used npm pack
+# Used npm pac
 
 
 
