@@ -13,7 +13,7 @@
 
 • Responsive Design and Cross-Platform Compatibility .
 
-# Selected category
+# Selected 
 • Painting
 
 
